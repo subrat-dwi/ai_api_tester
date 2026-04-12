@@ -5,11 +5,12 @@ import { motion } from 'framer-motion';
 type SystemNodeProps = {
   endpoint: string;
   description: string;
-  source: 'llm' | 'fallback';
+  mode: 'simulation' | 'live';
   loading: boolean;
+  compromisedLabel: string | null;
 };
 
-export function SystemNode({ endpoint, description, source, loading }: SystemNodeProps) {
+export function SystemNode({ endpoint, description, mode, loading, compromisedLabel }: SystemNodeProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.96 }}
@@ -18,7 +19,11 @@ export function SystemNode({ endpoint, description, source, loading }: SystemNod
       className="relative overflow-hidden rounded-xl border border-sky-400/25 bg-slate-950/80 p-5 shadow-glowBlue backdrop-blur-xl"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.18),transparent_55%),radial-gradient(circle_at_bottom,rgba(34,211,238,0.14),transparent_45%)]" />
-      <div className="relative flex flex-col gap-5 rounded-lg border border-sky-300/15 bg-slate-950/70 p-4">
+      <motion.div
+        animate={{ scale: loading ? [1, 1.012, 1] : 1 }}
+        transition={{ duration: 2.2, repeat: loading ? Infinity : 0, ease: 'easeInOut' }}
+        className="relative flex flex-col gap-5 rounded-lg border border-sky-300/15 bg-slate-950/70 p-4"
+      >
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.45em] text-cyan-200/70">
             Target System
@@ -37,7 +42,7 @@ export function SystemNode({ endpoint, description, source, loading }: SystemNod
           <div className="grid grid-cols-2 gap-3 text-xs text-slate-300">
             <div className="rounded-md border border-slate-700/70 bg-slate-900/60 p-3">
               <p className="text-slate-400">Mode</p>
-              <p className="mt-1 font-semibold text-sky-100">{source === 'llm' ? 'Live LLM' : 'Demo fallback'}</p>
+              <p className="mt-1 font-semibold text-sky-100">{mode === 'live' ? 'Live Attack Mode' : 'Simulation Mode'}</p>
             </div>
             <div className="rounded-md border border-slate-700/70 bg-slate-900/60 p-3">
               <p className="text-slate-400">State</p>
@@ -48,9 +53,9 @@ export function SystemNode({ endpoint, description, source, loading }: SystemNod
 
         <div className="flex items-center gap-3 text-xs text-slate-400">
           <span className={`h-2.5 w-2.5 rounded-full ${loading ? 'bg-amber-400 animate-pulse' : 'bg-emerald-400'}`} />
-          {loading ? 'Ingesting attacker payloads...' : 'Awaiting new attack run'}
+          {compromisedLabel ?? (loading ? 'Ingesting attacker payloads...' : 'Awaiting new attack run')}
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

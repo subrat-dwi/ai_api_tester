@@ -1,9 +1,9 @@
 import type { AttackFinding } from './types';
 
 const severityPenalty: Record<AttackFinding['severity'], number> = {
-  HIGH: 20,
-  MEDIUM: 10,
-  LOW: 5
+  HIGH: 18,
+  MEDIUM: 11,
+  LOW: 6
 };
 
 export function calculateSecurityScore(attacks: AttackFinding[]): number {
@@ -11,7 +11,9 @@ export function calculateSecurityScore(attacks: AttackFinding[]): number {
     .filter((attack) => attack.success)
     .reduce((total, attack) => total + severityPenalty[attack.severity], 0);
 
-  return Math.max(0, 100 - deductions);
+  const successPressure = Math.max(0, attacks.filter((attack) => attack.success).length - 1) * 2;
+
+  return Math.max(0, 100 - deductions - successPressure);
 }
 
 export function scoreLabel(score: number): string {
