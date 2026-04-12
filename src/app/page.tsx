@@ -78,7 +78,7 @@ function AttackDetailModal({ attack, onClose }: { attack: AttackFinding | null; 
             exit={{ scale: 0.98, y: 10, opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={(event) => event.stopPropagation()}
-            className="glass-panel relative w-full max-w-2xl overflow-hidden rounded-[28px] border border-slate-700/80 p-6 shadow-2xl shadow-black/60"
+            className="glass-panel relative w-full max-w-2xl overflow-hidden rounded-xl border border-slate-700/80 p-6 shadow-2xl shadow-black/60"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(239,68,68,0.15),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(34,197,94,0.12),transparent_35%)]" />
             <div className="relative flex items-center justify-between gap-4">
@@ -89,22 +89,22 @@ function AttackDetailModal({ attack, onClose }: { attack: AttackFinding | null; 
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-full border border-slate-600/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-slate-400 hover:text-white"
+                className="rounded-md border border-slate-600/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-slate-200 transition hover:border-slate-400 hover:text-white"
               >
                 Close
               </button>
             </div>
 
             <div className="relative mt-6 grid gap-4">
-              <div className="rounded-2xl border border-red-500/25 bg-red-950/35 p-4">
+              <div className="rounded-md border border-red-500/25 bg-red-950/35 p-4">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-red-200/70">Malicious Input</p>
                 <p className="mt-3 font-mono text-sm leading-6 text-red-50/90">{attack.input}</p>
               </div>
-              <div className="rounded-2xl border border-sky-500/25 bg-sky-950/35 p-4">
+              <div className="rounded-md border border-sky-500/25 bg-sky-950/35 p-4">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-sky-200/70">Explanation</p>
                 <p className="mt-3 text-sm leading-7 text-slate-100/90">{attack.reason}</p>
               </div>
-              <div className="rounded-2xl border border-emerald-500/25 bg-emerald-950/35 p-4">
+              <div className="rounded-md border border-emerald-500/25 bg-emerald-950/35 p-4">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-emerald-200/70">Fix Suggestion</p>
                 <p className="mt-3 text-sm leading-7 text-emerald-50/90">{attack.fix}</p>
               </div>
@@ -118,7 +118,7 @@ function AttackDetailModal({ attack, onClose }: { attack: AttackFinding | null; 
 
 function MetricCard({ label, value, accent }: { label: string; value: string; accent: string }) {
   return (
-    <div className="rounded-2xl border border-slate-700/80 bg-slate-950/70 px-4 py-3 shadow-lg shadow-black/20 backdrop-blur-xl">
+    <div className="rounded-lg border border-slate-700/80 bg-slate-950/70 px-4 py-3 shadow-lg shadow-black/20 backdrop-blur-xl">
       <p className="text-[10px] uppercase tracking-[0.35em] text-slate-400">{label}</p>
       <p className={`mt-2 text-2xl font-semibold ${accent}`}>{value}</p>
     </div>
@@ -225,20 +225,20 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="glass-panel relative overflow-hidden rounded-[32px] border border-slate-700/60 p-6 shadow-2xl shadow-black/30">
+        <section className="glass-panel relative overflow-hidden rounded-xl border border-slate-700/60 p-6 shadow-2xl shadow-black/30">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(239,68,68,0.12),transparent_32%)]" />
           <div className="relative grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
             <div className="space-y-4">
               <div>
                 <label htmlFor="api-url" className="text-sm font-medium text-slate-200">
-                  API URL / Endpoint (optional)
+                  API URL / Endpoint
                 </label>
                 <input
                   id="api-url"
                   value={apiUrl}
                   onChange={(event) => setApiUrl(event.target.value)}
                   placeholder="https://api.example.com/v1/summarize or POST /api/summarize"
-                  className="mt-3 w-full rounded-3xl border border-slate-700/80 bg-slate-950/80 px-5 py-3 font-mono text-sm leading-6 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/20"
+                  className="mt-3 w-full rounded-lg border border-slate-700/80 bg-slate-950/80 px-5 py-3 font-mono text-sm leading-6 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/20"
                 />
               </div>
 
@@ -251,7 +251,7 @@ export default function Home() {
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
                   placeholder="This API summarizes user documents"
-                  className="mt-3 min-h-[150px] w-full rounded-3xl border border-slate-700/80 bg-slate-950/80 px-5 py-4 font-mono text-sm leading-6 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/20"
+                  className="mt-3 min-h-[150px] w-full rounded-lg border border-slate-700/80 bg-slate-950/80 px-5 py-4 font-mono text-sm leading-6 text-slate-100 placeholder:text-slate-500 shadow-inner shadow-black/20 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/20"
                 />
               </div>
 
@@ -260,12 +260,12 @@ export default function Home() {
                   type="button"
                   onClick={handleSimulate}
                   disabled={loading}
-                  className="inline-flex items-center justify-center rounded-2xl border border-red-400/30 bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-glowRed transition hover:scale-[1.01] hover:from-red-400 hover:to-orange-400 disabled:cursor-not-allowed disabled:opacity-70"
+                  className="inline-flex items-center justify-center rounded-lg border border-red-400/30 bg-gradient-to-r from-red-500 via-rose-500 to-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-glowRed transition hover:scale-[1.01] hover:from-red-400 hover:to-orange-400 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {loading ? 'Simulating...' : 'Simulate Attack'}
                 </button>
 
-                <label className="inline-flex cursor-pointer items-center gap-3 rounded-2xl border border-slate-700/80 bg-slate-950/70 px-4 py-3 text-sm text-slate-300">
+                <label className="inline-flex cursor-pointer items-center gap-3 rounded-lg border border-slate-700/80 bg-slate-950/70 px-4 py-3 text-sm text-slate-300">
                   <input
                     type="checkbox"
                     checked={showFailedAttacks}
@@ -287,18 +287,18 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-[28px] border border-slate-700/70 bg-slate-950/70 p-5 shadow-lg shadow-black/20">
+            <div className="rounded-xl border border-slate-700/70 bg-slate-950/70 p-5 shadow-lg shadow-black/20">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.4em] text-slate-400">Simulation Console</p>
                   <h2 className="mt-2 text-lg font-semibold text-white">{loading ? 'Running agents...' : 'Standing by'}</h2>
                 </div>
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-700/80 bg-slate-900 text-sky-200 shadow-glowBlue">
+                <div className="flex h-12 w-12 items-center justify-center rounded-md border border-slate-700/80 bg-slate-900 text-sky-200 shadow-glowBlue">
                   ⚡
                 </div>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-slate-800 bg-black/50 p-4 font-mono text-xs leading-6 text-slate-300">
+              <div className="mt-5 rounded-md border border-slate-800 bg-black/50 p-4 font-mono text-xs leading-6 text-slate-300">
                 <div className="flex items-center gap-2 text-emerald-300">
                   <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                   terminal@simulator
@@ -321,11 +321,11 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-[36px] border border-slate-700/60 bg-slate-950/70 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl">
+        <section className="relative overflow-hidden rounded-xl border border-slate-700/60 bg-slate-950/70 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(148,163,184,0.08),transparent_35%)]" />
           <ArrowFlow attackCount={attackRows.length} successCount={successfulAttacks.length} />
 
-          <div className="relative z-10 grid gap-6 xl:grid-cols-[1fr_360px_1fr]">
+          <div className="relative z-10 grid gap-6 xl:grid-cols-[1fr_360px_1fr] xl:items-center">
             <div>
               <div className="mb-4 flex items-center gap-3">
                 <div className="h-3 w-3 rounded-full bg-red-400 shadow-[0_0_18px_rgba(248,113,113,0.85)]" />
@@ -345,7 +345,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="h-fit xl:sticky xl:top-6">
+            <div className="self-center">
               <SystemNode endpoint={endpoint} description={description} source={source} loading={loading} />
             </div>
 
@@ -361,7 +361,7 @@ export default function Home() {
                     <ResultCard key={`${attack.type}-success-${index}`} attack={attack} index={index} onClick={setSelectedAttack} />
                   ))
                 ) : (
-                  <div className="rounded-3xl border border-emerald-400/20 bg-emerald-950/20 px-5 py-8 text-sm text-emerald-100/80">
+                  <div className="rounded-lg border border-emerald-400/20 bg-emerald-950/20 px-5 py-8 text-sm text-emerald-100/80">
                     No breaches yet. Launch a simulation to see successful attacks appear here.
                   </div>
                 )}
@@ -370,7 +370,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="glass-panel overflow-hidden rounded-[32px] border border-slate-700/60 shadow-2xl shadow-black/30">
+        <section className="glass-panel overflow-hidden rounded-xl border border-slate-700/60 shadow-2xl shadow-black/30">
           <div className="border-b border-slate-800/70 px-6 py-5">
             <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-slate-400">Attack Log</p>
             <h2 className="mt-2 text-2xl font-semibold text-white">Detailed outcome timeline</h2>
@@ -384,6 +384,7 @@ export default function Home() {
                   <th className="px-6 py-4">Success / Fail</th>
                   <th className="px-6 py-4">Severity</th>
                   <th className="px-6 py-4">Short Reason</th>
+                  <th className="px-6 py-4">Fix Suggestion</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/70 text-slate-200">
@@ -415,6 +416,7 @@ export default function Home() {
                       </span>
                     </td>
                     <td className="max-w-xl px-6 py-4 text-slate-300">{attack.reason}</td>
+                    <td className="max-w-xl px-6 py-4 text-emerald-100/90">{attack.fix}</td>
                   </tr>
                 ))}
               </tbody>
@@ -423,7 +425,7 @@ export default function Home() {
         </section>
 
         {showFailedAttacks && failedAttacks.length > 0 ? (
-          <section className="glass-panel rounded-[32px] border border-slate-700/60 p-6 shadow-2xl shadow-black/30">
+          <section className="glass-panel rounded-xl border border-slate-700/60 p-6 shadow-2xl shadow-black/30">
             <div className="mb-4 flex items-center gap-3">
               <div className="h-3 w-3 rounded-full bg-red-400 shadow-[0_0_18px_rgba(248,113,113,0.85)]" />
               <h2 className="text-lg font-semibold text-white">Blocked Attempts</h2>

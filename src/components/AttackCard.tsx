@@ -20,7 +20,7 @@ export function AttackCard({ attack, index, onClick, muted = false }: AttackCard
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ delay: index * 0.09, duration: 0.45, ease: 'easeOut' }}
       whileHover={{ scale: 1.02, y: -2 }}
-      className={`group relative flex h-[132px] w-full flex-col justify-between overflow-hidden rounded-2xl border px-4 py-4 text-left backdrop-blur-xl transition-all duration-300 ${
+      className={`group relative flex w-full flex-col gap-4 overflow-hidden rounded-lg border px-4 py-4 text-left backdrop-blur-xl transition-all duration-300 ${
         muted
           ? 'border-red-500/20 bg-red-500/5 shadow-[0_0_25px_rgba(239,68,68,0.12)]'
           : 'border-red-500/30 bg-red-950/40 shadow-glowRed'
@@ -38,7 +38,7 @@ export function AttackCard({ attack, index, onClick, muted = false }: AttackCard
           {attack.severity}
         </span>
       </div>
-      <p className="relative max-h-[4.5rem] overflow-hidden font-mono text-xs leading-5 text-red-50/80">
+      <p className="relative whitespace-pre-wrap break-words font-mono text-xs leading-5 text-red-50/80">
         {attack.input}
       </p>
     </motion.button>
