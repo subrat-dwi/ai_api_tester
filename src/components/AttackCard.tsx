@@ -24,6 +24,33 @@ const stageLabels: Record<AttackFinding['stages'][number], string> = {
 export function AttackCard({ attack, index, onClick, stage, active = false, muted = false }: AttackCardProps) {
   const meta = attackMeta[attack.category];
 
+  if (!active) {
+    return (
+      <motion.button
+        type="button"
+        onClick={() => onClick(attack)}
+        initial={{ opacity: 0, x: -24, y: 10 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ delay: index * 0.08, duration: 0.35, ease: 'easeOut' }}
+        whileHover={{ scale: 1.01, y: -1 }}
+        className={`group relative flex w-full items-center gap-3 overflow-hidden rounded-lg border px-4 py-3 text-left backdrop-blur-xl transition-all duration-300 ${
+          muted
+            ? 'border-red-500/20 bg-red-500/5 shadow-[0_0_20px_rgba(239,68,68,0.1)]'
+            : 'border-red-500/30 bg-red-950/35 shadow-[0_0_24px_rgba(239,68,68,0.18)]'
+        }`}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-red-500/8 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="relative flex h-8 w-8 items-center justify-center rounded-md border border-red-400/25 bg-red-400/10 text-base">
+          {attack.icon}
+        </div>
+        <div className="relative min-w-0 flex-1">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-red-200/70">Attack {String(index + 1).padStart(2, '0')}</p>
+          <p className="truncate text-sm font-semibold text-white">{attack.type}</p>
+        </div>
+      </motion.button>
+    );
+  }
+
   return (
     <motion.button
       type="button"

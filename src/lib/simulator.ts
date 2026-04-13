@@ -111,9 +111,21 @@ export function formatSeconds(ms: number) {
 export function getCategoryFromText(category: string): AttackCategory {
   const normalized = category.toLowerCase();
 
-  if (normalized.includes('prompt')) return 'Prompt Injection';
-  if (normalized.includes('data')) return 'Data Exfiltration';
-  if (normalized.includes('role')) return 'Role Escalation';
-  if (normalized.includes('logic')) return 'Logic Bypass';
-  return 'Rate Abuse';
+  if (normalized.includes('prompt') || normalized.includes('jailbreak') || normalized.includes('instruction')) {
+    return 'Prompt Injection';
+  }
+  if (normalized.includes('data') || normalized.includes('exfil') || normalized.includes('leak') || normalized.includes('secret')) {
+    return 'Data Exfiltration';
+  }
+  if (normalized.includes('role') || normalized.includes('auth') || normalized.includes('privilege') || normalized.includes('admin')) {
+    return 'Role Escalation';
+  }
+  if (normalized.includes('rate') || normalized.includes('flood') || normalized.includes('dos') || normalized.includes('throttle')) {
+    return 'Rate Abuse';
+  }
+  if (normalized.includes('logic') || normalized.includes('bypass') || normalized.includes('validation')) {
+    return 'Logic Bypass';
+  }
+
+  return 'Logic Bypass';
 }
