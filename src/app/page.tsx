@@ -162,8 +162,6 @@ export default function Home() {
   const [selectedAttack, setSelectedAttack] = useState<AttackFinding | null>(null);
   const [loading, setLoading] = useState(false);
   const [source, setSource] = useState<SimulationResponse['source']>('fallback');
-  const [terminalHistory, setTerminalHistory] = useState<string[]>([]);
-  const [terminalActive, setTerminalActive] = useState('');
   const [timeline, setTimeline] = useState<TimelineEntry[]>([]);
   const [compromisedLabel, setCompromisedLabel] = useState<string | null>(null);
   const [summary, setSummary] = useState<RunSummary | null>(null);
@@ -171,7 +169,6 @@ export default function Home() {
   const [insightTab, setInsightTab] = useState<InsightTab>('weakness');
   const [tests, setTests] = useState<StoredTest[]>([]);
   const [historyLoading, setHistoryLoading] = useState(true);
-  const [selectedTestId, setSelectedTestId] = useState<string | null>(null);
 
   const runIdRef = useRef(0);
   const simulationSectionRef = useRef<HTMLElement | null>(null);
@@ -193,7 +190,6 @@ export default function Home() {
   useEffect(() => {
     if (!currentUser) {
       setTests([]);
-      setSelectedTestId(null);
       setHistoryLoading(false);
       return;
     }
@@ -224,10 +220,7 @@ export default function Home() {
   }
 
   async function narrate(text: string, holdMs = 900) {
-    setTerminalActive(text);
     await wait(Math.max(holdMs, Math.min(1500, text.length * 22)));
-    setTerminalHistory((current) => [...current, text]);
-    setTerminalActive('');
     await wait(120);
   }
 
@@ -270,19 +263,11 @@ export default function Home() {
     setDescription(test.description);
     setApiUrl(test.apiUrl ?? '');
     setMode(test.mode);
-    setSelectedTestId(test.id);
     void handleSimulate({
       description: test.description,
       apiUrl: test.apiUrl ?? '',
       mode: test.mode
     });
-  }
-
-  function selectHistoryTest(test: StoredTest) {
-    setSelectedTestId(test.id);
-    setDescription(test.description);
-    setApiUrl(test.apiUrl ?? '');
-    setMode(test.mode);
   }
 
   function addTimelineEntry(label: string, tone: TimelineEntry['tone'], startedAt: number, attackId?: string) {
@@ -318,8 +303,6 @@ export default function Home() {
     setAttacks([]);
     setStageById({});
     setActiveAttackId(null);
-    setTerminalHistory([]);
-    setTerminalActive('');
     setTimeline([]);
     setSummary(null);
     setCompromisedLabel(null);
@@ -431,8 +414,6 @@ export default function Home() {
         }
       }
 
-      setTerminalHistory((current) => [...current, 'Simulation complete.']);
-      setTerminalActive('');
       await narrate('Simulation complete.', 450);
     } catch {
       const fallback = fallbackSimulation(trimmedDescription, trimmedApiUrl, history.slice(-8));
@@ -443,8 +424,6 @@ export default function Home() {
         ...getOutcomeSummary(fallback.attacks),
         durationLabel: formatSeconds(performance.now() - startedAt)
       });
-      setTerminalHistory((current) => [...current, 'Network fallback engaged.']);
-      setTerminalActive('');
       setCompromisedLabel(null);
     } finally {
       if (runIdRef.current === currentRun) {

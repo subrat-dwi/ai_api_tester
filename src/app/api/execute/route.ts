@@ -23,30 +23,6 @@ type ResponseBlueprint = {
   sampleBody?: Record<string, unknown>;
 };
 
-const preferredBodyKeys = [
-  'prompt',
-  'message',
-  'input',
-  'query',
-  'text',
-  'content',
-  'description',
-  'body',
-  'payload',
-  'instruction',
-  'question',
-  'comment',
-  'data',
-  'value',
-  'token',
-  'secret',
-  'username',
-  'password',
-  'email',
-  'role',
-  'scope'
-];
-
 const successSignalWords = ['success', 'ok', 'allowed', 'accepted', 'processed', 'created', 'granted', 'passed', 'completed'];
 const failureSignalWords = ['error', 'fail', 'blocked', 'denied', 'forbidden', 'invalid', 'unauthorized', 'rejected', 'rate limit'];
 const leakSignalWords = ['secret', 'token', 'apiKey', 'api_key', 'password', 'credential', 'session', 'cookie', 'systemPrompt', 'internalConfig'];
